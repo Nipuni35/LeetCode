@@ -1,0 +1,58 @@
+class Solution {
+    public List<String> fullJustify(String[] words, int maxWidth) {
+        List<String> linesList = new ArrayList();
+        int total = 0;
+        int indexOfStart = 0;
+        int indexOfEnd = 0;
+
+        for (int i = 0; i < words.length; i = indexOfEnd + 1) {
+            indexOfStart = i;
+            total = 0;
+
+            for (int j = i; j < words.length; j++) {
+                total += words[j].length() + 1;
+
+                if (j == words.length - 1 || total + words[j + 1].length() > maxWidth) {
+                    indexOfEnd = j;
+                    break;
+                }
+            }
+
+            String line = justifyLine(words, indexOfStart, indexOfEnd, maxWidth);
+            linesList.add(line);
+        }
+
+        return linesList;
+    }
+
+    private String justifyLine(String[] words, int start, int end, int maxWidth) {
+        StringBuilder line = new StringBuilder();
+
+        if (start == end || end == words.length - 1) {
+            for (int i = start; i < end; i++) {
+                line.append(words[i]).append(" ");
+            }
+            line.append(words[end]);
+            line.append(" ".repeat(maxWidth - line.length()));
+        } else {
+            int totalLength = 0;
+            for (int i = start; i <= end; i++) {
+                totalLength += words[i].length();
+            }
+
+            int spaces = maxWidth - totalLength;
+            int regularSpaces = spaces / (end - start);
+            int extraSpaces = spaces % (end - start);
+
+            for (int i = start; i < end; i++) {
+                line.append(words[i]);
+                int spacesToAdd = i - start < extraSpaces ? regularSpaces + 1 : regularSpaces;
+                line.append(" ".repeat(spacesToAdd));
+            }
+
+            line.append(words[end]);
+        }
+
+        return line.toString();
+    }
+}
