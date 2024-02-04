@@ -1,0 +1,18 @@
+class Solution {
+    public List<Integer> sequentialDigits(int low, int high) {
+        String numbers = "123456789";
+        List<Integer> numbersList = new ArrayList();
+        String lows = Integer.toString(low);
+        String highs = Integer.toString(high);
+        int numberOfDigitsLow = lows.length();
+        int numberOfDigitsHigh = highs.length();
+        for (int i = numberOfDigitsLow; i<numberOfDigitsHigh + 1; i++ ) {
+            for (int j = 0; j <= numbers.length() - i; j ++) {
+                if (Integer.parseInt(numbers.substring(j,i+j)) >= low && Integer.parseInt(numbers.substring(j,i+j)) <= high) {
+                    numbersList.add(Integer.parseInt(numbers.substring(j,i+j)));
+                }
+            }
+        }
+        return numbersList;
+    }
+}
