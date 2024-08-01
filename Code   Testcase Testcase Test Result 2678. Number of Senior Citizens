@@ -1,0 +1,33 @@
+class Solution {
+    public int countSeniors(String[] details) {
+        int count = 0;
+        String[] splitted = new String[2];
+        String age = "";
+        for(String detail: details) {
+            if (detail.contains("F")) {
+                splitted = detail.split("F");
+                age = splitted[1].substring(0,splitted[1].length()-2);
+                if (Integer.parseInt(age)>60) {
+                    count+=1;
+                }
+            } 
+            if (detail.contains("M")) {
+                splitted = detail.split("M");
+                System.out.println(splitted[1]);
+                age = splitted[1].substring(0, splitted[1].length() - 2);
+                if (Integer.parseInt(age)>60) {
+                    count+=1;
+                }
+            }
+            if (detail.contains("O")) {
+                splitted = detail.split("O");
+                System.out.println(splitted[1]);
+                age = splitted[1].substring(0, splitted[1].length() - 2);
+                if (Integer.parseInt(age)>60) {
+                    count+=1;
+                }
+            }
+        }
+        return count;
+    }
+}
