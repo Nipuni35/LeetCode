@@ -1,0 +1,28 @@
+class Solution {
+    public int longestPalindrome(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        for (Character c: s.toCharArray()) {
+            if (map.containsKey(c)) {
+                map.put(c, map.get(c) + 1);
+            } else {
+                map.put(c, 1);
+            }
+        }
+        int sum = 0;
+        boolean oneOdd = false; 
+        for (Character c: map.keySet()) {
+            if (map.get(c)%2==0) {
+                sum+=map.get(c);
+            } else {
+                if (map.get(c) > 2) {
+                    sum+=(map.get(c)/2)*2;
+                }
+                if (oneOdd == false) {
+                    sum+=1;
+                    oneOdd = true;
+                }
+            }
+        }
+        return sum;
+    }
+}
